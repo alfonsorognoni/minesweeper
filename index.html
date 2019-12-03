@@ -16,6 +16,24 @@
     }
     #board .cell {
         border: 1px solid black;
+        position: relative;
+    }
+
+    #board .cell > div::after {
+        content: '';
+        display: block;
+        background-color: aqua;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    #board .cell > div.clicked::after {
+        opacity: 0;
+        display: none;
     }
 </style>
 <body>
