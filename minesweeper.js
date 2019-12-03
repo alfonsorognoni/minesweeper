@@ -12,6 +12,12 @@ class Minesweeper {
     }
 
     start() {
+        // CLEAR BOARD
+        document.getElementById('board').innerHTML = '';
+        document.getElementById('time').innerHTML = `Time: 0`;
+        this.time = 0;
+
+        // START
         this.shuffleBoard();
         this.drawBoard();
         this.listenCells();
@@ -64,6 +70,9 @@ class Minesweeper {
             if (cell.innerHTML === '*') {
                 clearInterval(this.timer);
                 alert('BOOOM!');
+                if(confirm('Do you want play again?')){
+                    this.start()
+                }
                 return false;
             }
 
@@ -101,7 +110,10 @@ class Minesweeper {
         const cellClickeds = this.container.querySelectorAll('.cell .clicked');        
         if (cellClickeds.length === cells.length-3) {
             clearInterval(this.timer);
-            alert('You Win')
+            alert('You Win');
+            if(confirm('Do you want play again?')){
+                this.start()
+            }
         }
     }
 }
