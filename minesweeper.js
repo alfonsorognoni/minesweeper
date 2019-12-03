@@ -8,7 +8,8 @@ class Minesweeper {
         this.container = document.getElementById('board');
         this.drawBoard = this.drawBoard.bind(this);
     }
-
+    //break
+    
     start() {
         this.shuffleBoard();
         this.drawBoard();
