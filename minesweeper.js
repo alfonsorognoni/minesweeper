@@ -7,12 +7,17 @@ class Minesweeper {
         ]
         this.container = document.getElementById('board');
         this.drawBoard = this.drawBoard.bind(this);
+        this.time = 0;
     }
 
     start() {
         this.shuffleBoard();
         this.drawBoard();
         this.listenCells();
+        setInterval(() => {
+            this.time += 1;
+            document.getElementById('time').innerHTML = `Time: ${this.time}`;
+        }, 1000);
     }
 
     shuffleBoard() {
