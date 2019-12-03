@@ -1,3 +1,3 @@
 import Minesweeper from './minesweeper.js';
-
-console.log(Minesweeper);
+const game = new Minesweeper();
+game.start();

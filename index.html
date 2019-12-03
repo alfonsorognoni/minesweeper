@@ -7,10 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Minesweeper</title>
 </head>
-
+<style>
+    #board {
+        max-width: 300px;
+        display: grid;
+        grid-template-columns: repeat(4, 30px);
+        grid-auto-rows: 30px;
+    }
+    #board .cell {
+        border: 1px solid black;
+    }
+</style>
 <body>
     <header>Minesweeper Darwoft Challenge</header>
-    <main>
+    <main id="board">
 
     </main>
     <footer>Create with ❤️ by Alfonso Rognoni 👨🏻‍💻</footer>
