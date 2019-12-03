@@ -37,9 +37,17 @@ class Minesweeper {
         const cells = this.container.querySelectorAll('.cell');
         cells.forEach((element, index) => {
             element.addEventListener('click', event => {
-                event.target.classList.add('clicked');
-                this.checkMine(event.target, index, true);
-            })
+                event.preventDefault();
+                if (!event.target.classList.contains('flag')) {
+                    event.target.classList.add('clicked');
+                    this.checkMine(event.target, index, true);
+                }
+            });
+
+            element.addEventListener('contextmenu', event => {
+                event.preventDefault();
+                event.target.classList.add('flag')
+            });
         });
     }
 
