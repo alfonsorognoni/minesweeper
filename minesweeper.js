@@ -8,8 +8,7 @@ class Minesweeper {
         this.container = document.getElementById('board');
         this.drawBoard = this.drawBoard.bind(this);
     }
-    //break
-    
+
     start() {
         this.shuffleBoard();
         this.drawBoard();
@@ -58,8 +57,22 @@ class Minesweeper {
             stop = true;
         }
 
-        if (index+1 < cells.length) {
-            this.checkMine(cells[index+1], index+1, false, stop);
+        const previous = Array.from(cells).slice(index-4, index);
+        const next = Array.from(cells).slice(index+1, cells.length)
+
+        for (let index = 0; index < next.length; index++) {
+            const element = next[index];
+            if (element.firstElementChild.innerHTML !== '*') {
+                element.firstElementChild.classList.add('clicked');
+            }
+        }
+
+        previous.reverse();
+        for (let index = 0; index < previous.length; index++) {
+            const element = previous[index];
+            if (element.firstElementChild.innerHTML !== '*') {
+                element.firstElementChild.classList.add('clicked');
+            }
         }
     }
 }
