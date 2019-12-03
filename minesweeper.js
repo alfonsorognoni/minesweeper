@@ -72,14 +72,9 @@ class Minesweeper {
             if (cell.dataset.mine === 'true') {
                 cell.classList.add('clicked');
                 this.showModal(false);
-                // clearInterval(this.timer);
-                // alert('BOOOM!');
-                // if(confirm('Do you want play again?')){
-                //     this.start()
-                // }
                 return false;
             }
-        } else if(cell.firstElementChild.dataset.mine !== 'true' && !clicked && !stop) {
+        } else if(cell.firstElementChild.dataset.mine !== 'true' && !clicked && !stop && !cell.firstElementChild.classList.contains('flag')) {
             cell.firstElementChild.classList.add('clicked');
         }  else if(cell.firstElementChild.dataset.mine && !clicked) {
             stop = true;
@@ -90,7 +85,7 @@ class Minesweeper {
 
         for (let index = 0; index < next.length; index++) {
             const element = next[index];
-            if (element.firstElementChild.dataset.mine !== 'true') {
+            if (element.firstElementChild.dataset.mine !== 'true' && !element.firstElementChild.classList.contains('flag')) {
                 element.firstElementChild.classList.add('clicked');
             } else {
                 index = next.length
@@ -100,7 +95,7 @@ class Minesweeper {
         previous.reverse();
         for (let index = 0; index < previous.length; index++) {
             const element = previous[index];
-            if (element.firstElementChild.dataset.mine !== 'true') {
+            if (element.firstElementChild.dataset.mine !== 'true' && !element.firstElementChild.classList.contains('flag')) {
                 element.firstElementChild.classList.add('clicked');
             } else {
                 index = previous.length
@@ -112,11 +107,7 @@ class Minesweeper {
         const cells = this.container.querySelectorAll('.cell');
         const cellClickeds = this.container.querySelectorAll('.cell .clicked');        
         if (cellClickeds.length === cells.length-3) {
-            clearInterval(this.timer);
-            alert('You Win');
-            if(confirm('Do you want play again?')){
-                this.start()
-            }
+            this.showModal(true);
         }
     }
 
