@@ -41,6 +41,7 @@ class Minesweeper {
                 if (!event.target.classList.contains('flag')) {
                     event.target.classList.add('clicked');
                     this.checkMine(event.target, index, true);
+                    this.checkWin();
                 }
             });
 
@@ -85,6 +86,14 @@ class Minesweeper {
             } else {
                 index = previous.length
             }
+        }
+    }
+
+    checkWin() {
+        const cells = this.container.querySelectorAll('.cell');
+        const cellClickeds = this.container.querySelectorAll('.cell .clicked');        
+        if (cellClickeds.length === cells.length-3) {
+            alert('You Win')
         }
     }
 }
