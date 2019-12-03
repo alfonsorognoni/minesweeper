@@ -37,9 +37,11 @@ class Minesweeper {
             const cell = document.createElement('div');
             cell.classList.add('cell')
             cell.innerHTML = '<div></div>'
+            cell.firstElementChild.dataset.mine = false;
 
             if (element.mine) {
-                cell.innerHTML = '<div>*</div>'
+                cell.innerHTML = '<div>💣</div>';
+                cell.firstElementChild.dataset.mine = true;
             }
             this.container.appendChild(cell);
         });
@@ -67,18 +69,19 @@ class Minesweeper {
     checkMine(cell, index, clicked, stop=false) {
         const cells = this.container.querySelectorAll('.cell');
         if (clicked) {
-            if (cell.innerHTML === '*') {
-                clearInterval(this.timer);
-                alert('BOOOM!');
-                if(confirm('Do you want play again?')){
-                    this.start()
-                }
+            if (cell.dataset.mine === 'true') {
+                cell.classList.add('clicked');
+                this.showModal(false);
+                // clearInterval(this.timer);
+                // alert('BOOOM!');
+                // if(confirm('Do you want play again?')){
+                //     this.start()
+                // }
                 return false;
             }
-
-        } else if(cell.firstElementChild.innerHTML !== '*' && !clicked && !stop) {
+        } else if(cell.firstElementChild.dataset.mine !== 'true' && !clicked && !stop) {
             cell.firstElementChild.classList.add('clicked');
-        }  else if(cell.firstElementChild.innerHTML === '*' && !clicked) {
+        }  else if(cell.firstElementChild.dataset.mine && !clicked) {
             stop = true;
         }
 
@@ -87,7 +90,7 @@ class Minesweeper {
 
         for (let index = 0; index < next.length; index++) {
             const element = next[index];
-            if (element.firstElementChild.innerHTML !== '*') {
+            if (element.firstElementChild.dataset.mine !== 'true') {
                 element.firstElementChild.classList.add('clicked');
             } else {
                 index = next.length
@@ -97,7 +100,7 @@ class Minesweeper {
         previous.reverse();
         for (let index = 0; index < previous.length; index++) {
             const element = previous[index];
-            if (element.firstElementChild.innerHTML !== '*') {
+            if (element.firstElementChild.dataset.mine !== 'true') {
                 element.firstElementChild.classList.add('clicked');
             } else {
                 index = previous.length
@@ -115,6 +118,20 @@ class Minesweeper {
                 this.start()
             }
         }
+    }
+
+    showModal(win) {
+        const modal = document.getElementById('modal');
+        if (win) {
+            const html = `<p>You win</p>`;
+            document.getElementById('modal-body').innerHTML = html;
+        } else {
+            const html = `<p>BOOM!!</p>`;
+            document.getElementById('modal-body').innerHTML = html;
+        }
+        modal.style.display = 'block';
+        clearInterval(this.timer);
+
     }
 }
 export default Minesweeper;

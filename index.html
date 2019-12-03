@@ -8,11 +8,20 @@
     <title>Minesweeper</title>
 </head>
 <style>
+    #container {
+        width: 600px;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        font-family: Arial, Helvetica, sans-serif;
+    }
     #board {
-        max-width: 300px;
+        min-height: 120px;
+        margin: auto;
         display: grid;
-        grid-template-columns: repeat(4, 30px);
-        grid-auto-rows: 30px;
+        grid-template-columns: repeat(4, 40px);
+        grid-auto-rows: 40px;
     }
     #board .cell {
         border: 1px solid black;
@@ -41,15 +50,52 @@
         content: "🚩";
         text-align: center;
     }
+
+    footer {
+        margin: 30px;
+    }
+
+    #modal {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .8);
+        top: 0;
+        left: 0;
+        display: none;
+        z-index: 2;
+    }
+
+    #modal-content {
+        background-color: white;
+        margin: 30px auto;
+        padding: 15px;
+        text-align: center;
+        width: 350px;
+        height: 150px;
+    }
 </style>
 <body>
-    <header>Minesweeper Darwoft Challenge</header>
-    <div id="time">Time: 0</div>
-    <main id="board">
+    <div id="container">
+        <header><h1>Minesweeper Darwoft Challenge</h1></header>
+        <div>
+            <button id="btn-start">START GAME</button>
+        </div>
+        <div><h4 id="time">Time: 0</h4></div>
+        <main id="board">
 
-    </main>
-    <footer>Create with ❤️ by Alfonso Rognoni 👨🏻‍💻</footer>
-
+        </main>
+        <footer>Create with ❤️ by Alfonso Rognoni 👨🏻‍💻</footer>
+    </div>
+    <div id="modal">
+        <div id="modal-content">
+            <div id="modal-body"></div>
+            <div id="modal-footer">
+                <button id="close">Close</button>
+                <button id="restart">Play Again</button>
+            </div>
+        </div>
+    </div>
     <script src="index.js"></script>
 </body>
 
