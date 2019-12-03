@@ -72,6 +72,8 @@ class Minesweeper {
             const element = next[index];
             if (element.firstElementChild.innerHTML !== '*') {
                 element.firstElementChild.classList.add('clicked');
+            } else {
+                index = next.length
             }
         }
 
@@ -80,6 +82,8 @@ class Minesweeper {
             const element = previous[index];
             if (element.firstElementChild.innerHTML !== '*') {
                 element.firstElementChild.classList.add('clicked');
+            } else {
+                index = previous.length
             }
         }
     }
