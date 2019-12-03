@@ -35,17 +35,32 @@ class Minesweeper {
 
     listenCells() {
         const cells = this.container.querySelectorAll('.cell');
-        cells.forEach(element => {
+        cells.forEach((element, index) => {
             element.addEventListener('click', event => {
                 event.target.classList.add('clicked');
-                this.checkMine(event.target);
+                this.checkMine(event.target, index, true);
             })
         });
     }
 
-    checkMine(cell) {
-        if (cell.innerHTML === '*') {
-            alert('BOOOM!');
+    checkMine(cell, index, clicked, stop=false) {
+        const cells = this.container.querySelectorAll('.cell');
+        if (clicked) {
+            if (cell.innerHTML === '*') {
+                alert('BOOOM!');
+                return false;
+            }
+
+        } else if(cell.firstElementChild.innerHTML !== '*' && !clicked && !stop) {
+            console.log(cell);
+            // debugger
+            cell.firstElementChild.classList.add('clicked');
+        }  else if(cell.firstElementChild.innerHTML === '*' && !clicked) {
+            stop = true;
+        }
+
+        if (index+1 < cells.length) {
+            this.checkMine(cells[index+1], index+1, false, stop);
         }
     }
 }
