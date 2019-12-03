@@ -52,8 +52,6 @@ class Minesweeper {
             }
 
         } else if(cell.firstElementChild.innerHTML !== '*' && !clicked && !stop) {
-            console.log(cell);
-            // debugger
             cell.firstElementChild.classList.add('clicked');
         }  else if(cell.firstElementChild.innerHTML === '*' && !clicked) {
             stop = true;
