@@ -8,13 +8,14 @@ class Minesweeper {
         this.container = document.getElementById('board');
         this.drawBoard = this.drawBoard.bind(this);
         this.time = 0;
+        this.timer;
     }
 
     start() {
         this.shuffleBoard();
         this.drawBoard();
         this.listenCells();
-        setInterval(() => {
+        this.timer = setInterval(() => {
             this.time += 1;
             document.getElementById('time').innerHTML = `Time: ${this.time}`;
         }, 1000);
@@ -61,6 +62,7 @@ class Minesweeper {
         const cells = this.container.querySelectorAll('.cell');
         if (clicked) {
             if (cell.innerHTML === '*') {
+                clearInterval(this.timer);
                 alert('BOOOM!');
                 return false;
             }
@@ -98,6 +100,7 @@ class Minesweeper {
         const cells = this.container.querySelectorAll('.cell');
         const cellClickeds = this.container.querySelectorAll('.cell .clicked');        
         if (cellClickeds.length === cells.length-3) {
+            clearInterval(this.timer);
             alert('You Win')
         }
     }
